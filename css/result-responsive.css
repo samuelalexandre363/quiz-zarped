@@ -1,0 +1,109 @@
+/* Keep the result report comfortable on narrow screens. */
+body:has(#result:not([hidden])) { overflow-x: hidden; }
+
+#result.workspace {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow-x: clip;
+}
+
+#result .result-wrap {
+  width: min(100%, 1050px);
+  max-width: 1050px;
+  box-sizing: border-box;
+  margin-inline: auto;
+  padding-inline: clamp(18px, 4vw, 50px);
+  overflow-wrap: anywhere;
+}
+
+#result .result-heading,
+#result .result-overview,
+#result .diagnosis-grid,
+#result .priority-card,
+#result .action-section,
+#result .result-bottom,
+#result .score-card,
+#result .pillar-results,
+#result .diagnosis-card,
+#result .action-card {
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+#result .result-overview,
+#result .diagnosis-grid,
+#result .action-grid { width: 100%; min-width: 0; }
+
+#result .result-heading h1,
+#result .result-heading p,
+#result .result-section-title h2,
+#result .result-section-title p,
+#result .priority-card h2,
+#result .priority-card p,
+#result .diagnosis-card h2,
+#result .diagnosis-item h3,
+#result .diagnosis-item p,
+#result .action-card h3,
+#result .action-card p,
+#result .result-bottom h2,
+#result .result-bottom p {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+#result .pillar-bar > div:first-child { min-width: 0; }
+#result .pillar-bar > div:first-child span { min-width: 0; overflow-wrap: anywhere; }
+#result .result-bottom .button,
+#result .result-bottom .button-label {
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 720px) {
+  #result.workspace { padding-block: 34px 48px; }
+  #result .result-wrap { width: calc(100% - 32px); padding-inline: 0; }
+  #result .result-heading { margin-bottom: 28px; }
+  #result .result-heading h1 { font-size: clamp(36px, 11vw, 52px); line-height: .98; }
+  #result .result-overview,
+  #result .diagnosis-grid,
+  #result .action-grid { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+  #result .score-card,
+  #result .pillar-results,
+  #result .diagnosis-card,
+  #result .action-card,
+  #result .priority-card { padding: 20px; }
+  #result .score-card,
+  #result .pillar-results { overflow: hidden; }
+  #result .score-gauge { width: min(100%, 290px); }
+  #result .pillar-bar > div:first-child { align-items: flex-start; }
+  #result .pillar-bar b { flex: 0 0 auto; }
+  #result .diagnosis-card h2 { display: flex; align-items: center; gap: 9px; font-size: 30px; }
+  #result .diagnosis-icon { width: 32px; height: 32px; flex: 0 0 32px; }
+  #result .priority-card { margin-top: 14px; }
+  #result .priority-card h2 { font-size: 30px; line-height: 1.05; }
+  #result .priority-card p { font-size: 17px; line-height: 1.4; }
+  #result .action-section { margin-top: 36px; }
+  #result .result-section-title h2 { font-size: clamp(32px, 9vw, 42px); line-height: 1; }
+  #result .result-section-title p { max-width: 100%; font-size: 15px; }
+  #result .action-card h3 { font-size: 26px; }
+  #result .action-card p { font-size: 16px; }
+  #result .result-bottom { display: block; margin-top: 34px; padding-top: 24px; }
+  #result .result-bottom h2 { font-size: 27px; line-height: 1.05; }
+  #result .result-bottom p { font-size: 16px; line-height: 1.4; }
+  #result .result-bottom .button { display: flex; width: 100%; margin-top: 20px; padding-inline: 15px; gap: 12px; }
+}
+
+@media (max-width: 390px) {
+  #result .result-wrap { width: calc(100% - 24px); }
+  #result .score-card,
+  #result .pillar-results,
+  #result .diagnosis-card,
+  #result .action-card,
+  #result .priority-card { padding: 17px; }
+  #result .result-heading h1 { font-size: 35px; }
+  #result .score-gauge { width: min(100%, 260px); }
+  #result .result-bottom .button { font-size: 15px; }
+}

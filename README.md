@@ -21,4 +21,3 @@ As perguntas não exigem canal específico, investimento em mídia, loja física
 ## Verificação
 
 Execute `node --test tests/scoring.test.cjs tests/leads-api.test.cjs` para validar pontuação, encaminhamento server-side, ocultação do segredo e respostas de duplicidade. `node --check js/quiz.js`, `node --check api/leads.js` e `node --check ../webhook-leads/src/server.js` verificam sintaxe.
-

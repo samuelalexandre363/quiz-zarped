@@ -1,0 +1,157 @@
+/* Compact Zarped score gauge. Kept separate so the component can evolve safely. */
+.score-card {
+  padding: 26px 24px 28px;
+  min-width: 0;
+}
+
+.score-card::before {
+  inset: -44% -12% auto;
+  height: 92%;
+  opacity: .58;
+}
+
+.score-gauge {
+  width: min(100%, 280px);
+  height: 178px;
+  margin: 17px auto 8px;
+}
+
+.score-gauge-glow {
+  width: 58%;
+  height: 36%;
+  left: 21%;
+  top: 31%;
+  filter: blur(34px);
+}
+
+.score-gauge-ticks {
+  stroke-width: 6;
+  stroke-dasharray: .35 4.65;
+  opacity: .52;
+}
+
+.score-gauge-track,
+.score-gauge-arc {
+  stroke-width: 12;
+}
+
+/* The original central needle becomes a short marker that travels along the arc. */
+.score-needle {
+  color: var(--score-color);
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 4;
+  stroke-linecap: round;
+  transform-origin: 140px 146px;
+  transform: rotate(var(--needle-angle, -90deg));
+  filter: drop-shadow(0 0 6px var(--score-color));
+}
+
+.score-needle path {
+  d: path("M 140 31 L 140 54");
+  fill: none;
+}
+
+.score-needle circle {
+  display: none;
+}
+
+.score-gauge-value {
+  inset: 87px 0 auto;
+  z-index: 2;
+  align-items: baseline;
+  gap: 5px;
+  pointer-events: none;
+}
+
+.score-gauge-value strong {
+  font-size: 66px;
+  line-height: .8;
+  text-shadow: 0 2px 15px #040b2c, 0 0 2px #040b2c;
+}
+
+.score-gauge-value span {
+  margin: 0;
+  font-size: 10px;
+  color: #9fb2cf;
+}
+
+.score-gauge-scale {
+  left: 18px;
+  right: 18px;
+  bottom: 3px;
+}
+
+.level-badge {
+  max-width: 100%;
+  font-size: 15px;
+  line-height: 1.15;
+  padding: 8px 14px;
+}
+
+.score-card > p {
+  max-width: 510px;
+  margin: 15px auto 0;
+  line-height: 1.45;
+}
+
+.score-card.is-settled::after {
+  display: none;
+}
+
+@media (max-width: 720px) {
+  .score-card {
+    padding: 24px 17px 25px;
+  }
+
+  .score-gauge {
+    width: min(100%, 260px);
+    height: 166px;
+    margin-top: 15px;
+  }
+
+  .score-gauge-value {
+    inset: 81px 0 auto;
+  }
+
+  .score-gauge-value strong {
+    font-size: 60px;
+  }
+
+  .score-gauge-scale {
+    left: 15px;
+    right: 15px;
+  }
+
+  .level-badge {
+    font-size: 14px;
+  }
+
+  .score-card > p {
+    margin-top: 14px;
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 390px) {
+  .score-card {
+    padding-inline: 14px;
+  }
+
+  .score-gauge {
+    width: min(100%, 238px);
+    height: 153px;
+  }
+
+  .score-gauge-value {
+    inset: 73px 0 auto;
+  }
+
+  .score-gauge-value strong {
+    font-size: 54px;
+  }
+
+  .score-card > p {
+    font-size: 14px;
+  }
+}

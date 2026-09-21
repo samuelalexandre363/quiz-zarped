@@ -1,0 +1,298 @@
+/* Full-screen question flow: the question itself becomes the interface. */
+body:has(#question:not([hidden])) {
+  background: #fff;
+}
+
+body:has(#question:not([hidden])) .site-header,
+body:has(#question:not([hidden])) .quiz-footer {
+  display: none;
+}
+
+#question.workspace {
+  min-height: 100svh;
+  padding: 0;
+  background: #fff;
+  color: #06102c;
+}
+
+#question.workspace::before {
+  display: none;
+}
+
+#question .question-layout {
+  display: grid;
+  align-items: center;
+  width: min(760px, calc(100% - 48px));
+  min-height: 100svh;
+  margin-inline: auto;
+  padding-block: 54px 42px;
+}
+
+#question .question-card {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  animation: question-stage-in .48s cubic-bezier(.16,1,.3,1) both;
+}
+
+#question .progress-meta {
+  margin-bottom: 36px;
+  color: #687994;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: .15px;
+}
+
+#question .progress-track {
+  position: fixed;
+  inset: 0 0 auto;
+  width: 100%;
+  height: 14px;
+  margin: 0;
+  border-radius: 0;
+  border-bottom: 1px solid #dce4ef;
+  background: #fffffff2;
+  box-shadow: 0 4px 16px #07112f0d;
+  overflow: visible;
+  z-index: 100;
+  pointer-events: none;
+}
+
+#question .progress-track::before {
+  content: '';
+  position: absolute;
+  inset: 5px 0 auto;
+  height: 4px;
+  background: #e8edf5;
+}
+
+#question .progress-track > div {
+  position: absolute;
+  left: 0;
+  top: 5px;
+  height: 4px;
+  border-radius: 0 999px 999px 0;
+  background: linear-gradient(90deg, #2424df 0%, #1769e8 58%, #76a9ff 100%);
+  background-size: 180% 100%;
+  box-shadow: 0 1px 4px #1769e83b;
+  transition: width .48s cubic-bezier(.2,.75,.25,1);
+  animation: question-progress-flow 2.8s ease-in-out infinite;
+  z-index: 1;
+}
+
+#question .progress-track > div::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  right: 0;
+  top: 50%;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: #377fec;
+  box-shadow: 0 2px 7px #1769e859;
+  transform: translateY(-50%);
+  transition: opacity .2s ease;
+}
+
+#question .progress-track[aria-valuenow="0"] > div::after {
+  opacity: 0;
+}
+
+#question .question-card fieldset {
+  margin: 0;
+}
+
+#question .question-card legend {
+  max-width: 720px;
+}
+
+#question .question-card legend > span:last-child {
+  color: #06102c;
+  font-size: clamp(34px, 4.2vw, 48px);
+  font-weight: 500;
+  line-height: 1.02;
+  letter-spacing: -.035em;
+  text-wrap: balance;
+}
+
+#question .question-card #question-hint:empty {
+  display: none;
+}
+
+#question .question-card #question-hint:not(:empty) {
+  max-width: 620px;
+  margin-top: 14px;
+  color: #66758c;
+  font-size: 16px;
+}
+
+#question .question-card #options {
+  display: grid;
+  gap: 10px;
+  margin-top: 30px;
+}
+
+#question .option {
+  position: relative;
+  min-height: 62px;
+  margin: 0;
+  padding: 13px 17px;
+  border: 1px solid #d7dfeb;
+  border-radius: 10px;
+  background: #f8fafc;
+  color: #06102c;
+  box-shadow: none;
+  animation: question-option-in .38s cubic-bezier(.16,1,.3,1) both;
+  transition: transform .22s cubic-bezier(.2,.75,.25,1), border-color .22s ease, background-color .22s ease, box-shadow .22s ease;
+}
+
+#question .option:nth-child(1) { animation-delay: .04s; }
+#question .option:nth-child(2) { animation-delay: .08s; }
+#question .option:nth-child(3) { animation-delay: .12s; }
+#question .option:nth-child(4) { animation-delay: .16s; }
+#question .option:nth-child(5) { animation-delay: .20s; }
+#question .option:nth-child(6) { animation-delay: .24s; }
+
+#question .option input {
+  width: 19px;
+  height: 19px;
+  border-color: #8591a3;
+  accent-color: #2020e7;
+}
+
+#question .light-card .option > span {
+  color: #06102c;
+  font-size: 17px;
+  line-height: 1.25;
+}
+
+#question .option:has(input:checked) {
+  border-color: #2424e6;
+  background: #eef2ff;
+  box-shadow: inset 3px 0 #2424e6;
+  transform: translateX(3px);
+}
+
+#question .question-actions {
+  margin-top: 27px;
+  padding-top: 22px;
+  border-top: 1px solid #e4e9f1;
+}
+
+#question .question-actions .text-button {
+  color: #536179;
+  font-size: 15px;
+}
+
+#question .question-actions .button {
+  width: auto;
+  min-width: 168px;
+  min-height: 54px;
+  margin: 0;
+  padding: 13px 18px;
+  border-radius: 9px;
+  font-size: 16px;
+}
+
+#question .question-actions .button:disabled {
+  border-color: #cad5ea;
+  background: #dbe4f6;
+  color: #7c8ba4;
+  opacity: 1;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  #question .option:hover {
+    transform: translateX(3px);
+    border-color: #8ea8d1;
+    background: #fff;
+    box-shadow: 0 8px 22px #0c1a3820;
+  }
+
+  #question .option:has(input:checked):hover {
+    border-color: #2424e6;
+    background: #eef2ff;
+  }
+}
+
+@media (max-width: 720px) {
+  #question .question-layout {
+    align-items: start;
+    width: calc(100% - 36px);
+    padding-block: 39px 26px;
+  }
+
+  #question .progress-meta {
+    margin-bottom: 27px;
+    font-size: 11px;
+  }
+
+  #question .question-card legend > span:last-child {
+    font-size: clamp(30px, 8.5vw, 39px);
+    line-height: 1.04;
+  }
+
+  #question .question-card #options {
+    gap: 9px;
+    margin-top: 24px;
+  }
+
+  #question .option {
+    min-height: 58px;
+    padding: 12px 13px;
+  }
+
+  #question .light-card .option > span {
+    font-size: 16px;
+  }
+
+  #question .question-actions {
+    gap: 13px;
+    margin-top: 23px;
+    padding-top: 18px;
+  }
+
+  #question .question-actions .button {
+    min-width: 154px;
+    min-height: 52px;
+  }
+}
+
+@media (max-width: 390px) {
+  #question .question-layout {
+    width: calc(100% - 28px);
+  }
+
+  #question .question-actions .button {
+    min-width: 140px;
+    padding-inline: 14px;
+  }
+}
+
+@keyframes question-stage-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes question-progress-flow {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes question-option-in {
+  from { opacity: 0; transform: translateY(7px); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #question *,
+  #question *::before,
+  #question *::after {
+    animation: none !important;
+  }
+}

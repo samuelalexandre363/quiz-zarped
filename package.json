@@ -1,0 +1,12 @@
+{
+  "name": "quiz-zarped",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Caça-Gargalo — diagnóstico de crescimento da Zarped Company",
+  "engines": {
+    "node": "20.x"
+  },
+  "scripts": {
+    "test": "node --test tests/*.test.cjs"
+  }
+}
